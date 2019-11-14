@@ -1,0 +1,64 @@
+{include  file='public/header' title='$title'/};
+    <link rel="stylesheet" href="__CSS_PATH__aboutus.css">
+    <div class="container">
+        <div class="box">
+            <!-- 身体图片开始 -->
+            <div class="row tupian">
+                <img src="__IMG_PATH__aboutus/banner2.png" alt="图片加载失败">
+            </div>
+            <!-- 身体图片结束 -->
+            <!-- 身体关于我们标题开始 -->
+            <div class="row aboutus-title">
+                <div class="column aboutus-title-left "></div>
+                <div class="column aboutus-title-midddle">
+                    <div class="aboutus-title-midddle-zw">{$cnav['nname']}</div>
+                    <div class="aboutus-title-midddle-yw">{$cnav['ename']}</div>
+                </div>
+                <div class="column aboutus-title-right"></div>
+            </div>
+            <!-- 身体关于我们标题结束 -->
+            <!-- 身体关于我们内容开始 -->
+            <div class="row aboutus-content">
+                <div class="col aboutus-content-left col-lg-6 col-md-6 col-sm-12">
+                    {volist name='aboutus' id='v'}
+                    <div class="aboutus-content-left-wenzi1">
+                        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{$v['adetails']}
+                    </div>
+                </div>
+                <div class="column aboutus-content-right col-lg-6 col-md-6 col-sm-12">
+                    <img src="{$v['abanner']}" alt="图片加载失败">
+                </div>
+                {/volist}
+            </div>
+            <!-- 身体关于我们内容结束 -->
+            <!-- 身体人物标题开始 -->
+            <!-- <div class="row people-title"></div> -->
+            <div class="row aboutus-title">
+                <div class="column aboutus-title-left"></div>
+                <div class="column aboutus-title-midddle">
+                    <div class="aboutus-title-midddle-zw">商品分类</div>
+                    <div class="aboutus-title-midddle-yw">Commodity fication</div>
+                </div>
+                <div class="column aboutus-title-right"></div>
+            </div>
+            <!-- 身体人物标题结束 -->
+            <!-- 身体人物内容开始 -->
+            <div class="row people-content">
+                {volist name='xianshi' id='v'}
+                <div class="column people-first col-lg-3 col-md-3 col-sm-12">
+                    <div class="people-first-tu">
+                        <img src="{$v['agbanner']}" alt="图片加载失败">
+                    </div>
+                    <div class="people-first-wenzi">
+                        <div class="people-first-wenzi1">{$v['agtitle']}</div>
+                        <div class="people-first-wenzi2">{$v['agtype']}</div>
+                    </div>
+                </div>
+                {/volist}
+            </div>
+            <!-- 身体人物内容结束 -->
+        </div>
+    </div>
+
+{include file='public/footer' /}
+ <script src="__JS_PATH__aboutus.js"></script>

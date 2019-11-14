@@ -1,0 +1,60 @@
+{include file='public/header'/ title=$title}
+<link rel="stylesheet" href="__CSS_PATH__item.css">
+    <!-- 中心内容 -->
+    <!-- banner -->
+    <div class="banner ">
+        <img src="__IMG_PATH__item/banner.jpg " alt=" ">
+    </div>
+    <!-- item -->
+
+    <div class="title ">
+        <span>{$cnav['gname']}</span>
+    </div>
+    <div class="container hhh ">
+        <!-- <div class="row "> -->
+        <div class="swiper-container ddd " style="width: 50%;height:300px; ">
+
+            <div class="swiper-wrapper llbb ">
+            {volist name='all' id='v'}
+                <div class="lunbo swiper-slide ">
+                    <img src="{$v}" alt=" ">
+                </div>
+
+            {/volist}
+
+            </div>
+            <div class="swiper-button-prev " style="left: 0 "></div>
+            <div class="swiper-button-next " style="right: 0 "></div>
+            <div class="swiper-pagination "></div>
+        </div>
+
+        <div class="word ">
+            <div class="item ">
+                <div class="price ">
+                    <span>市场价：￥{$cnav['gmprice']}</span>
+                </div>
+                <div class="price1 ">
+                    <span>零售价：</span>
+                    <span class="buy-price ">￥{$cnav['gsale']}</span>
+                </div>
+                <div class="line "></div>
+                <div class="state ">
+                    <span>库存状况：{$cnav['gstock']}件</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="wwword container">
+        <h2>商品介绍</h2>
+        <span style="font-size: 16px;color:rgb(128,128,128); ">{$cnav['gdetail']}</span>
+        <div style="height: 24px; "></div>
+        <span style="font-size: 16px;color:rgb(128,128,128); ">{$cnav['gdetail']}</span>
+    <!-- </div> -->
+
+
+{include file='public/footer'/}
+
+<script src="__JS_PATH__common.js "></script>
+<script src="__JS_PATH__item.js "></script>
+
+

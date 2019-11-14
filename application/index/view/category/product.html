@@ -1,0 +1,58 @@
+{include file='public/header' title='$title' /}
+    <link rel="stylesheet" href="__CSS_PATH__product.css">
+    <!-- banner -->
+    <div class="container banner">
+        <div class="images">
+            <img src="__IMG_PATH__product/banner.jpg" alt="">
+        </div>
+    </div>
+    <!-- 标题-->
+    <div class="container title1">
+        <div class="b-box">
+            <!-- <div class="row"> -->
+            <div class="title">
+                <span class="line-left"></span>
+                <div class="word">
+                    <p class="main">{$cnav['nname']}</p>
+                    <p class="sub">{$cnav['ename']}</p>
+                </div>
+                <span class="line-right"></span>
+            </div>
+            <!-- </div> -->
+        </div>
+    </div>
+    <!-- 列表 -->
+    <div class="container list1">
+        <div class="L-box">
+            <ul class="list">
+                {volist name='cate' id='v'}
+                <li class="items active">
+                    <span>{$v['cname']}</span>
+                    <div class="content box-style">
+                        {volist name="v['goods']" id='v1'}
+                        <div class="shop">
+                            <div class="shoplist">
+                                <div class="shoppic">
+                                    <div class="shoppicture">
+                                        <a href="item?gid={$v1.gid}">
+                                            <img src="{$v1.gthumb}" alt="">
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="shopword">
+                                    <a class="word1" href="item?gid={$v1.gid}">
+                                        {$v1['gname']}
+                            </a>
+                                </div>
+                            </div>
+                        </div>
+                        {/volist}
+                    </div>
+                </li>
+                {/volist}
+            </ul>
+        </div>
+    </div>
+    <div class="content" style="height: 900px;"></div>
+    {include file='public/footer' /}
+<script src="__JS_PATH__product.js"></script>

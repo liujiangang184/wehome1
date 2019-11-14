@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>查看新闻</title>
+    <link rel="stylesheet" href="/wehome1/public/static/css/layui.css">
+    <script src="/wehome1/public/static/layui.js"></script>
+</head>
+<body>
+<table id="demo" lay-filter="test" ></table>
+
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+<script>
+    const HOSTNAME='/wehome1/public/index.php';
+    layui.use(['table','layer'] ,function(){
+        let  $=layui.jquery;
+        let table = layui.table;
+        let layer = layui.layer;
+        //第一个实例
+        table.render({
+            elem:'#demo',
+            url:'/wehome1/public/index.php/admin/news/query',
+            cols:[[
+                {field:'neid',title:'ID',width:80},
+                {field:'nename',title:'新闻名称',width:150,edit:'text'},
+                {field:'nedetails',title:'新闻详情',width:180,edit:'text'},
+                {field:'netime',title:'新闻时间',width:180,edit:'text'},
+                {field:'right',title:'操作',toolbar:'#barDemo',width:200}
+            ]],
+        });
+        //监听行工具事件
+        table.on('tool(test)', function(obj){
+
+            var data = obj.data;
+            if(obj.event === 'del'){
+                layer.confirm('真的删除行么', function(index){
+                    obj.del();
+                    layer.close(index);
+                    $.ajax({
+                        url:'/wehome1/public/index.php/admin/news/delete',
+                        type:'POST',
+                        data:data,
+                        dataType:'json',
+                        success:res=> {
+                            if(res.code==200){
+                                layer.alert(res.msg);
+                            }else {
+                                layer.alert(res.msg);
+                            }
+                        }
+                    })
+                });
+            } else if(obj.event === 'edit'){
+                layer.prompt({
+                    formType: 2
+                    ,value: data.email
+                }, function(value, index){
+                    obj.update({
+                        email: value
+                    });
+                    layer.close(index);
+                });
+            }
+        });
+        //监听单元格编辑
+        table.on('edit(test)', function(obj){
+            let value = obj.value,
+                id = obj.data.id,
+                field = obj.field;
+            // layer.open({
+            //     type:3,
+            //     icon:1,
+            // })
+            let index=layer.load(2);
+            $.ajax({
+                url:HOSTNAME + '/admin/news/edit',
+                type: 'POST',
+                data:{id,field,value},
+                dataType:'json',
+                success:res=>{
+                    layer.close(index);
+                }
+            })
+            // layer.msg('[ID: '+ id.id +'] ' + field + ' 字段更改为：'+ value);
+        });
+    });
+</script>
+</body>
+</html>

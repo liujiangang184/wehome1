@@ -1,0 +1,45 @@
+{include  file='public/header' title='$title' /}
+<link rel="stylesheet" href="__CSS_PATH__news.css">
+    <div style="width: 100%;height:20px "></div>
+    <div class="banner ">
+        <div class="container ">
+            <div class="row ">
+                <div class="img col-lg-12 col-sm-12 col-xs-12 ">
+                    <img src="__IMG_PATH__news/1.png " alt=" ">
+                </div>
+            </div>
+            <div class="container ">
+                <div class="row ">
+                    <div class="conserve ">
+                        <div class="conserve-wire col-lg-5 col-md-5 col-sm-5 col-xs-5 "></div>
+
+                        <div class="conserve-text col-lg-2 col-md-2 col-sm-2 col-xs-2 ">
+                            <div>{$cnav['nname']}</div>
+                            <div class="con-text-eng ">{$cnav['ename']}</div>
+                        </div>
+                        <div class="conserve-wire col-lg-5 col-md-5 col-sm-5 col-xs-5 "></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row ">
+                <ul class="message col-lg-10 col-md-10 col-sm-10 col-xs-10 ">
+                    {volist name='new' id='v'}
+                    <li class="message-content ">
+                        <div><a href="newss?neid={$v['neid']}">{$v['nename']}</a></div>
+                        <div><span>{$v['netime']}</span></div>
+                    </li>
+                    {/volist}
+                </ul>
+            </div>
+            <div class="row ">
+                <div class="img img1 col-lg-10 col-md-10 col-sm-10 col-xs-10 ">
+                    <img src="__IMG_PATH__news/2.png " alt=" ">
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    </div>
+    <div style="width: 100%;height:120px "></div>
+{include  file='public/footer' /}

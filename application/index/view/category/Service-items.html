@@ -1,0 +1,49 @@
+{include  file='public/header' title='$title'/}
+<link rel="stylesheet" href="__CSS_PATH__Service-items.css">
+    <!-- 最外面的大盒子 -->
+    <div class="fwxm-box">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="fwxm-juzhong col-lg-10 col-lg-offset-1 col-md-10  col-md-offset-1 col-xs-12">
+                    <!-- 图片 -->
+                    <div class="img">
+                        <img src="__IMG_PATH__Service-items/服务项目大图.jpg" alt="">
+                    </div>
+                    <!-- 服务项目 -->
+                    <div class="fwxm-gywm">
+                        <div class="wzbf">
+                            <h2>{$cnav['nname']}</h2>
+                            <h3>{$cnav['ename']}</h3>
+
+                        </div>
+                        <span></span>
+                    </div>
+                    <!-- 下面的广告 -->
+                    <div class="fwxm-guanggao">
+                        {volist name='fuwu' id='v'}
+                        <div class="fwxm-guanggao-dg col-lg-3 col-md-3 col-xs-12">
+                            <div class="img col-lg-12 col-lg-offset-0 col-md-12 col-md-offset-0 col-xs-6 col-xs-offset-3">
+                                <img src="{$v['sebanner']}" alt="">
+                            </div>
+                            <div class="wzbf col-lg-12 col-md-12 col-xs-12">
+                                <a href="在线预约.html">
+                                    <div class="bt">{$v['setitle']}</div>
+                                </a>
+                                <div class="xian">
+                                    <span></span>
+                                    <div></div>
+                                </div>
+                                <p class="jieshao">
+                                    {$v['sedetails']}
+                                </p>
+                            </div>
+                        </div>
+                        {/volist}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 最外面的大盒子结束 -->
+{include file='public/footer' /}
+<script src="__JS_PATH__Service-items.js"></script>

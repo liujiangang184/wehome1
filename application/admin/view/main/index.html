@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>逸家管理平台</title>
+    <link rel="stylesheet" href="/wehome1/public/static/css/layui.css">
+    <script src="/wehome1/public/static/layui.js"></script>
+</head>
+<style>
+    .layui-tab{
+        /*position: relative;*/
+        width: 100%;
+        height: calc(100% - 20px);
+        box-sizing: border-box;
+    }
+    .layui-tab>.layui-tab-content{
+        /*position: absolute;*/
+        /*top:41px;*/
+        /*bottom: 0;*/
+        width: 100%;
+        height: 100%;
+
+    }
+    .layui-tab-content>.layui-tab-item{
+        height: 100%;
+    }
+    iframe{
+        width: 100%;
+        height: 100%;
+    }
+</style>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo">逸家后台布局</div>
+        <!-- 头部区域（可配合layui已有的水平导航） -->
+        <ul class="layui-nav layui-layout-left">
+            <li class="layui-nav-item"><a href="">控制台</a></li>
+            <li class="layui-nav-item"><a href="">商品管理</a></li>
+            <li class="layui-nav-item"><a href="">用户</a></li>
+            <li class="layui-nav-item">
+                <a href="javascript:;">其它系统</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="">邮件管理</a></dd>
+                    <dd><a href="">消息管理</a></dd>
+                    <dd><a href="">授权管理</a></dd>
+                </dl>
+            </li>
+        </ul>
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item">
+                <dl class="layui-nav-child">
+                    <dd><a href="">基本资料</a></dd>
+                    <dd><a href="">安全设置</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item"><a href="/wehome1/public/index.php/admin/login/index">退了</a></li>
+        </ul>
+    </div>
+
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="" href="javascript:;">导航管理</a>
+                    <dl class="layui-nav-child">
+                        <dd data-id="11"  data-url="/wehome1/public/admin/nav/openinsert"><a href="javascript:;">添加导航</a></dd>
+                        <dd data-id="12"  data-url="/wehome1/public/admin/nav/index"><a href="javascript:;">查看导航</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">房屋分类</a>
+                    <dl class="layui-nav-child">
+                        <dd data-id="21" data-url="/wehome1/public/admin/category/index"><a href="javascript:;">查看分类</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">房屋管理</a>
+                    <dl class="layui-nav-child">
+                        <dd data-id="31" data-url="/wehome1/public/admin/goods/openinsert"><a href="javascript:;">添加小屋</a></dd>
+                        <dd data-id="32" data-url="/wehome1/public/admin/goods/index"><a href="javascript:;">查看小屋 </a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">预约管理</a>
+                    <dl class="layui-nav-child">
+                        <dd data-id="41" data-url="/wehome1/public/admin/online/index"><a href="javascript:;">查看预约</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">新闻管理</a>
+                    <dl class="layui-nav-child">
+                        <dd data-id="51" data-url="/wehome1/public/admin/news/openinsert"><a href="javascript:;">添加新闻</a></dd>
+                        <dd data-id="52" data-url="/wehome1/public/admin/news/index"><a href="javascript:;">查看新闻</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">关于我们</a>
+                    <dl class="layui-nav-child">
+                        <dd data-id="61" data-url="/wehome1/public/admin/aboutus/index"><a href="javascript:;">查看简介</a></dd>
+                        <dd data-id="62" data-url="/wehome1/public/admin/aboutgoods/openinsert"><a href="javascript:;">添加分类</a></dd>
+                        <dd data-id="63" data-url="/wehome1/public/admin/aboutgoods/index"><a href="javascript:;">查看分类</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">服务项目</a>
+                    <dl class="layui-nav-child">
+                        <dd data-id="71" data-url="/wehome1/public/admin/serviceitems/openinsert"><a href="javascript:;">添加项目</a></dd>
+                        <dd data-id="72" data-url="/wehome1/public/admin/serviceitems/index"><a href="javascript:;">查看项目</a></dd>
+                    </dl>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="layui-body">
+        <!-- 内容主体区域 -->
+        <div style="padding: 15px; width: 100%;height: 100%;box-sizing: border-box">
+            <div class="layui-tab" lay-filter="demo" lay-allowclose="true">
+                <ul class="layui-tab-title">
+                </ul>
+                <div class="layui-tab-content">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-footer">
+        <!-- 底部固定区域 -->
+        © layui.com - 底部固定区域
+    </div>
+</div>
+<script>
+    //JavaScript代码区域
+    layui.use(['layer','element','form'], function(){
+        let layer=layui.layer , $=layui.$, element= layui.element;
+        //Tab的切换功能，切换事件监听等，需要依赖element模块
+        $('dd').on('click',function () {
+            let did=this.dataset.id;  //$(this).data('id');
+            // let li=$(".layui-tab-title li"); //$('li[lay-id]')
+            let li=$('li[lay-id]');
+            // let flag=false;
+            let lid=li.map(function (index,element) {
+                return element.getAttribute('lay-id')
+            })
+            let flag=Array.from(lid).some(ele=>ele==did);
+            // console.dir(Array);
+            //let flag=Array.prototype.some.call(arr,ele=>ele==did);
+            // for(let i=0;i<li.length;i++){
+            //     var lid=li[i].attributes['lay-id'].nodeValue;
+            //     //li[i].getAttribute('lay-id');
+            //     //$(li[i]).attr('lay-id');
+            //     if (did==lid) {
+            //         flag=true;
+            //     }
+            // }
+            if(flag){
+                element.tabChange('demo',did);
+                flag=false;
+            }else {
+                let urls=this.dataset.url;
+                element.tabAdd('demo',{
+                    //this>a>text
+                    //data-id
+                    //this.dataset.id
+                    title:$(this).children('a').text(),  //$('a'.this).text();
+                    content:`
+                        <iframe frameborder="0" src="${urls}"></iframe>
+                        `,
+                    id:did
+                });
+                element.tabChange('demo',did);
+            }
+        })
+        // var active = {
+        //     tabAdd: function(){
+        //         //新增一个Tab项
+        //         element.tabAdd('demo', {
+        //             title: '新选项'+ (Math.random()*1000|0), //用于演示
+        //             content: '内容'+ (Math.random()*1000|0),
+        //             id: new Date().getTime() //实际使用一般是规定好的id，这里以时间戳模拟下
+        //         })
+        //     },
+        //     tabDelete: function(othis){
+        //         //删除指定Tab项
+        //         element.tabDelete('demo', '55'); //删除：“商品管理”
+        //
+        //
+        //         othis.addClass('layui-btn-disabled');
+        //     },
+        //     tabChange: function(){
+        //         //切换到指定Tab项
+        //         element.tabChange('demo', '22'); //切换到：用户管理
+        //     }
+        // };
+        // $('.site-demo-active').on('click', function(){
+        //     var othis = $(this), type = othis.data('type');
+        //     active[type] ? active[type].call(this, othis) : '';
+        // });
+    });
+</script>
+</body>
+</html>

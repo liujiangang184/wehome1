@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <meta charset="UTF-8">
+    <title>添加导航</title>
+    <link rel="stylesheet" href="/wehome1/public/static/css/layui.css">
+    <script src="/wehome1/public/static/layui.js"></script>
+</head>
+<body>
+<form class="layui-form"> <!-- 提示：如果你不想用form，你可以换成div等任何一个普通元素 -->
+    <div class="layui-form-item">
+        <label class="layui-form-label">新闻名称</label>
+        <div class="layui-input-block">
+            <input type="text" name="nename" lay-verify="dnename" placeholder="请输入新闻名称" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">新闻详情</label>
+        <div class="layui-input-block">
+            <input type="text" name="nedetails" lay-verify="required" placeholder="请输入新闻详情" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="*">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+    <!-- 更多表单结构排版请移步文档左侧【页面元素-表单】一项阅览 -->
+</form>
+<script>
+    layui.use(['form','layer'],function () {
+        let form = layui.form;
+        let  $=layui.jquery;
+        let layer= layui.layer;
+        form.verify({
+            dnename: function(value, item){ //value：表单的值、item：表单的DOM对象
+                if(value==''){
+                    return '新闻名称不能为空';
+                }
+                if(!new RegExp("^[a-zA-Z0-9_\u4e00-\u9fa5\\s·]+$").test(value)){
+                    return '新闻名称不能有特殊字符';
+                }
+                if(/(^\_)|(\__)|(\_+$)/.test(value)){
+                    return '新闻名称首尾不能出现下划线\'_\'';
+                }
+                if(/^\d+\d+\d$/.test(value)){
+                    return '新闻名称不能全为数字';
+                }
+            },
+            //我们既支持上述函数式的方式，也支持下述数组的形式
+            //数组的两个值分别代表：[正则匹配、匹配不符时的提示文字]
+        });
+        form.on('submit(*)',function (data) {
+            let qs=data.field;
+            $.ajax({
+                url:'/wehome1/public/index.php/admin/news/insert',
+                data:qs,
+                dataType:'json',
+                type:'POST',
+                success:function (res) {
+                    if(res.code==200){
+                        layer.alert(res.msg);
+                        console.log(form);
+                    }else{
+                        alert(res.msg);
+                    }
+                }
+            })
+            return false;
+        })
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加项目</title>
+    <link rel="stylesheet" href="/wehome1/public/static/css/layui.css">
+    <script src="/wehome1/public/static/layui.js"></script>
+</head>
+<body>
+<form class="layui-form"> <!-- 提示：如果你不想用form，你可以换成div等任何一个普通元素 -->
+    <div class="layui-form-item">
+        <label class="layui-form-label">服务图片</label>
+        <div class="layui-input-block">
+            <div class="layui-upload">
+                <button type="button" class="layui-btn" id="test2" style="float: left">图片上传</button>
+                <div class="layui-inline layui-word-aux">
+                    <span>上传图片最佳尺寸512*512 最佳比例1:1 最大不超过200K</span>
+                </div>
+                <div style="clear: both"></div>
+                <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
+                    预览图：
+                    <div class="layui-upload-list">
+                        <img src="" alt="" width="100" id="sebanner">
+                    </div>
+                    <input type="hidden" name="sebanner" >
+                </blockquote>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">服务名称</label>
+        <div class="layui-input-block">
+            <input type="text" name="setitle" lay-verify="required" placeholder="请输入3-10个字符" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">市场价格</label>
+        <div class="layui-input-block">
+            <input type="text" name="sedetails" lay-verify="required" placeholder="请输入市场价格" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="*">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+</form>
+<script>
+    const HOSTNAME ='/wehome1/public/index.php';
+    layui.use(['form','layer','upload','layedit'],function () {
+        let {$,form,upload,layedit}=layui;
+        layedit.set({
+            uploadImage: {
+                url: HOSTNAME + '/admin/upload/index'
+            }
+        })
+        upload.render({
+            elem:'#test2',
+            url:HOSTNAME + '/admin/upload/index',
+            accept:'image',
+            acceptMime:'image/*',
+            done:res=>{
+                if(res.code==0){
+                    $('#sebanner').attr('src',res.data.src);
+                    $('input[name=sebanner]').val((index,value)=>value+res.data.src);
+                }
+            }
+        });
+        form.on('submit(*)',function (data) {
+            let {field,form}=data;
+            delete  field.file;
+            $.ajax({
+                url:'/wehome1/public/index.php/admin/serviceitems/insert',
+                data:field,
+                dataType:'json',
+                type:'POST',
+                success:function (res) {
+                    if(res.code==200){
+                        layer.alert(res.msg);
+                        form.reset();
+                        $('input[type=hidden]').val('');
+                        $('#sebanner').attr('src','');
+                        $('#demo3>img').remove();
+                    }else{
+                        alert(res.msg);
+                    }
+                }
+            })
+            return false;
+        })
+    });
+</script>
+</body>
+</html>

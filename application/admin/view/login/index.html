@@ -1,0 +1,119 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>逸家民宿</title>
+    <link rel="stylesheet" href="/wehome1/public/static/css/layui.css">
+    <script src="/wehome1/public/static/layui.js"></script>
+</head>
+<body>
+<style>
+    html, body {
+        width: 100%;
+        height: 100%;
+    }
+
+    body {
+        background-image: url('../../../../public/static/images/2.jpg');
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        background-position: center;
+
+    }
+
+    .father {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 1000px;
+        height: auto;
+    }
+
+    .layui-input {
+        width: 300px;
+        line-height: 40px;
+    }
+
+    .login-main {
+        margin: 0 auto;
+        width: 400px;
+        height: 400px; /* border:1px solid #e6e6e6; */
+        background-color: rgba(0,0,0, 0.2);
+    }
+
+    form {
+        padding: 0 50px;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+     
+    .layui-form {
+        margin-top: 20px;
+    }
+
+    .layui-input-inline {
+        margin-top: 30px;
+    }
+
+     button {
+        width: 300px;
+    }
+</style>
+ 
+<div class="father">
+    <div class="login-main">
+           <p style="color:#fff;font-size:25px;text-align:center;">欢迎逸家民宿</p>
+        <form class="layui-form">
+            <div class="layui-input-inline">
+                            <input type="text" class="layui-input" name="username" required lay-verify="required"
+                                   placeholder="请输入用户名" autocomplete="off" class="layui-input">
+                       
+            </div>
+            <div class="layui-input-inline">
+                <input type="password" name="password" required lay-verify="required" placeholder="请输入密码"
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-input-inline">
+
+                <img src="{:captcha_src()}" alt="captcha" width="150" height="38" name="icode"
+                     onclick="this.src=this.src+'?a='+Date.now()">
+                <input type="text" name="code"  required lay-verify="required" placeholder="请输入验证码" autocomplete="off" style="width: 140px;float: right;margin-left: 10px"
+                       class="layui-input">
+            </div>
+            <div class="layui-input-inline login-btn">
+                <button lay-submit lay-filter="*" class="layui-btn">登录</button>
+            </div>
+        </form>
+    </div>
+     
+</div>
+<script>
+    //Demo
+    const HOSTNAME = '/wehome1/public/index.php'
+    layui.use('form', function(){
+        var form = layui.form;
+        var  $=layui.$;
+        //监听提交
+        form.on('submit(*)',function(data){
+           $.ajax({
+               url:HOSTNAME + '/admin/login/check',
+               data:data.field,
+               type:'POST',
+               dataType:'json',
+               success:function (res) {
+                    if(res.code == 200){
+                        location.replace(HOSTNAME + '/admin/main/index')
+                    }else{
+                        alert(res.msg);
+                    }
+               }
+           });
+           return false;
+        });
+    });
+</script>
+</body>
+</html>
